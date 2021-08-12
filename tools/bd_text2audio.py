@@ -4,7 +4,7 @@ import base64
 import requests
 from pathlib import Path
 
-output_dir = 'output'
+OUTPUT_DIR = 'output'
 
 
 def text2audio(text, filename):
@@ -20,8 +20,8 @@ def text2audio(text, filename):
     }
     resp = requests.post(url, data=data).json()
     base64_text = resp["data"]
-    p = Path(output_dir)
+    p = Path(OUTPUT_DIR)
     p.mkdir(exist_ok=True)
-    with open(output_dir + '/' + filename, "wb") as fp:
+    with open(OUTPUT_DIR + '/' + filename, "wb") as fp:
         content = base64_text.split(",")[1]
         fp.write(base64.b64decode(content))
